@@ -46,4 +46,21 @@ public class ReelsController {
                 .result(reelsService.findUserReel(user.getId()))
                 .build();
     }
+
+    @DeleteMapping("/{reelId}")
+    public ApiResponse<String> deleteReel(@PathVariable Integer reelId,@RequestHeader("Authorization") String jwt){
+        User user = userService.findUserByJwt(jwt);
+        reelsService.deleteReel(reelId,user.getId());
+        return ApiResponse.<String>builder()
+                .result("Reel has been deleted")
+                .build();
+    }
+
+    @PutMapping("/like/{reelId}")
+    public ApiResponse<ReelsResponse> likeReel(@PathVariable Integer reelId,@RequestHeader("Authorization") String jwt){
+        User user = userService.findUserByJwt(jwt);
+        return ApiResponse.<ReelsResponse>builder()
+                .result(reelsService.likeReel(reelId, user.getId()))
+                .build();
+    }
 }

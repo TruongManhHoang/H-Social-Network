@@ -1,5 +1,6 @@
 package com.example.social_network.repository;
 
+import com.example.social_network.dto.response.PostResponse;
 import com.example.social_network.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -24,3 +24,9 @@ app:
   services:
     profile: http://localhost:8081/profile
 
+cloudinary:
+  cloud_name: deia6omkx
+  api_key: 417941542592642
+  api_secret: 0IE9wGpWrqUQlyf-CWNQaPa01d4
+
+

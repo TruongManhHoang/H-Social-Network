@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ReelsRepository extends JpaRepository<Reels, Long> {
+public interface ReelsRepository extends JpaRepository<Reels, Integer> {
     public List<Reels> findByUserId(Integer userId);
 
 }

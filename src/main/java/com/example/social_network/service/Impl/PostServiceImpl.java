@@ -1,5 +1,6 @@
 package com.example.social_network.service.Impl;
 
+import com.cloudinary.Cloudinary;
 import com.example.social_network.dto.request.PostRequest;
 import com.example.social_network.dto.response.PostResponse;
 import com.example.social_network.entity.Post;
@@ -30,10 +31,13 @@ public class PostServiceImpl implements PostService {
 
     PostMapper postMapper;
 
+    Cloudinary cloudinary;
+
     @Override
     public PostResponse createPost(PostRequest request, Integer userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         Post post = postMapper.toPost(request);
+
         post.setCreatedAt(LocalDateTime.now());
         post.setUser(user);
         return postMapper.toPostResponse(postRepository.saveAndFlush(post));
@@ -63,6 +67,26 @@ public class PostServiceImpl implements PostService {
     @Override
     public PostResponse findPostById(Integer id) {
         return postMapper.toPostResponse(postRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.POST_NOT_FOUND)));
+    }
+
+    @Override
+    public PostResponse updatePost(PostRequest request, Integer postId, Integer userId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new AppException(ErrorCode.POST_NOT_FOUND));
+        User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
+        if(request.getUser() != null){
+            post.setUser(request.getUser());
+        }
+        if(request.getCaption() != null){
+            post.setCaption(request.getCaption());
+        }
+        if(request.getImage() != null){
+            post.setImage(request.getImage());
+        }
+        if(request.getVideo() != null){
+            post.setVideo(request.getVideo());
+        }
+        post = postRepository.saveAndFlush(post);
+        return postMapper.toPostResponse(post);
     }
 
     @Override

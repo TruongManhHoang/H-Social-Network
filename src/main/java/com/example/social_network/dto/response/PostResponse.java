@@ -32,5 +32,5 @@ public class PostResponse {
 
     private List<User> users = new ArrayList<>();
 
-    List<Comment> comments = new ArrayList<>();
+    List<CommentResponse> comments = new ArrayList<>();
 }

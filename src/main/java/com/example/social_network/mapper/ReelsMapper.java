@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ReelsMapper {
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
     Reels toReels(ReelsRequest request);
 
     ReelsResponse toReelResponse(Reels reels);

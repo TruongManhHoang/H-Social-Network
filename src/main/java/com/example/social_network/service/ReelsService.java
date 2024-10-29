@@ -14,4 +14,8 @@ public interface ReelsService {
     public List<ReelsResponse> findAllReels();
 
     List<ReelsResponse> findUserReel(Integer userId);
+
+    public void deleteReel(Integer reelId, Integer userId);
+
+    public ReelsResponse likeReel(Integer reelId, Integer userId);
 }

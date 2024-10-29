@@ -14,9 +14,12 @@ public interface PostService {
 
     public PostResponse findPostById(Integer id);
 
+    public PostResponse updatePost(PostRequest request, Integer postId, Integer userId);
+
     public List<PostResponse> findAllPost();
 
     public PostResponse savePost(Integer postId, Integer userId);
 
     public PostResponse likePost(Integer postId, Integer userId);
+
 }

@@ -66,12 +66,6 @@ public class UserServiceImpl implements UserService {
         if (request.getEmail() != null) {
             user1.setEmail(request.getEmail());
         }
-        if (request.getFollowers() != null) {
-            user1.setFollowers(request.getFollowers());
-        }
-        if (request.getFollowings() != null) {
-            user1.setFollowings(request.getFollowings());
-        }
 
         return userMapper.toUserResponse(userRepository.save(user1));
     }
@@ -95,8 +89,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.toUserResponse(userRepository.findUserByEmail(Email));
     }
     public UserResponse followUser(Integer reqUserId, Integer id2){
-        User reqUser = userRepository.findById(reqUserId).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
-        User user2 = userRepository.findById(id2).orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        User reqUser = userRepository.findById(reqUserId)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        User user2 = userRepository.findById(id2)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
 
         // Kiểm tra và khởi tạo danh sách followers và followings nếu cần
         if (user2.getFollowers() == null) {
@@ -106,8 +102,14 @@ public class UserServiceImpl implements UserService {
             reqUser.setFollowings(new ArrayList<>());
         }
 
-        user2.getFollowers().add(reqUser.getId());
-        reqUser.getFollowings().add(user2.getId());
+        // Kiểm tra trạng thái theo dõi và cập nhật danh sách
+        if (user2.getFollowers().contains(reqUser.getId())) {
+            user2.getFollowers().remove(reqUser.getId());
+            reqUser.getFollowings().remove(user2.getId());
+        } else {
+            user2.getFollowers().add(reqUser.getId());
+            reqUser.getFollowings().add(user2.getId());
+        }
 
         reqUser = userRepository.save(reqUser);
         userRepository.save(user2);

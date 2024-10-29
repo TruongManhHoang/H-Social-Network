@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -16,7 +20,7 @@ import lombok.experimental.FieldDefaults;
 public class Reels {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    Integer id;
 
     String title;
 
@@ -25,5 +29,15 @@ public class Reels {
     @ManyToOne
     @JsonIgnore
     User user;
+
+    @ManyToMany
+    @JsonIgnore
+    List<User> liked = new ArrayList<>();
+
+    LocalDateTime createdAt;
+
+    @OneToMany
+    @JsonIgnore
+    List<Comment> comments = new ArrayList<>();
 
 }

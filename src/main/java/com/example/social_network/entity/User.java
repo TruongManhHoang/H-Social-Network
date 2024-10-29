@@ -27,7 +27,9 @@ public class User {
     String password;
     LocalDate dob;
     String gender;
+    @ElementCollection
     List<Integer> followers = new ArrayList<>();
+    @ElementCollection
     List<Integer> followings = new ArrayList<>();
 
     @JsonIgnore

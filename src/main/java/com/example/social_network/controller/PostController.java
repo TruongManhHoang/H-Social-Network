@@ -34,7 +34,7 @@ public class PostController {
     public ApiResponse<String> deletePost(@PathVariable Integer postId, @RequestHeader("Authorization") String jwt) {
         User user = userService.findUserByJwt(jwt);
         postService.delete(postId, user.getId());
-        return ApiResponse.<String>builder().result("User has been deleted").build();
+        return ApiResponse.<String>builder().result("Post has been deleted").build();
     }
     @GetMapping("/{postId}")
     public ApiResponse<PostResponse> findPostById(@PathVariable Integer postId){
@@ -50,8 +50,15 @@ public class PostController {
                 .result(postService.findPostByUserId(user.getId()))
                 .build();
     }
+    @PutMapping("/update/user/{postId}")
+    public ApiResponse<PostResponse> updatePost(@PathVariable Integer postId, @RequestHeader("Authorization") String jwt, @RequestBody PostRequest request){
+        User user = userService.findUserByJwt(jwt);
+        return ApiResponse.<PostResponse>builder()
+                .result(postService.updatePost(request, postId, user.getId()))
+                .build();
+    }
     @PutMapping("/save/{postId}")
-    public ApiResponse<PostResponse> updatePost(@PathVariable Integer postId, @RequestHeader("Authorization") String jwt){
+    public ApiResponse<PostResponse> savePost(@PathVariable Integer postId, @RequestHeader("Authorization") String jwt){
         User user = userService.findUserByJwt(jwt);
         return ApiResponse.<PostResponse>builder()
                 .result(postService.savePost(postId, user.getId()))

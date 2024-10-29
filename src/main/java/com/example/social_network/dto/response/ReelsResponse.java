@@ -4,6 +4,10 @@ import com.example.social_network.entity.User;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -12,7 +16,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ReelsResponse {
 
-    Long id;
+    Integer id;
 
     String title;
 
@@ -20,4 +24,9 @@ public class ReelsResponse {
     
     User user;
 
+    List<User> liked;
+
+    List<CommentResponse> comments;
+
+    LocalDateTime createdAt;
 }

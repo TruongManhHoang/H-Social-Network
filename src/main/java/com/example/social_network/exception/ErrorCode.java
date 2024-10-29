@@ -21,6 +21,7 @@ public enum ErrorCode {
     USER_NOT_FOUND(1011, "User not found", HttpStatus.BAD_REQUEST),
     POST_NOT_FOUND(1012, "Post not found", HttpStatus.BAD_REQUEST),
     DELETE_POST(1013, "You can't delete another users post", HttpStatus.BAD_REQUEST),
+    DELETE_COMMENT(1013, "You can't delete another users comment", HttpStatus.BAD_REQUEST),
     INVALID_TOKEN(1014, "Invalid token!", HttpStatus.BAD_REQUEST),
     PROVIDE_TOKEN(1015, "Please provide a valid token!", HttpStatus.BAD_REQUEST),
     EMAIL_EXISTED(1016, "This email already used with another account", HttpStatus.BAD_REQUEST),
@@ -28,6 +29,9 @@ public enum ErrorCode {
     PASSWORD_AUTH(1018, "Password not matched", HttpStatus.BAD_REQUEST),
     COMMENT_NOT_FOUND(1019, "Comment not found", HttpStatus.BAD_REQUEST),
     CHAT_NOT_FOUND(1020, "Chat not found", HttpStatus.BAD_REQUEST),
+    REEL_NOT_FOUND(1021, "Reel not found", HttpStatus.BAD_REQUEST),
+    DELETE_REEL(1013, "You can't delete another users reel", HttpStatus.BAD_REQUEST),
+
 
     ;
 

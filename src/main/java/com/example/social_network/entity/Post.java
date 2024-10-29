@@ -30,6 +30,7 @@ public class Post {
     LocalDateTime createdAt;
 
     @ManyToOne
+    @JsonIgnore
     User user;
 
     @ManyToMany
