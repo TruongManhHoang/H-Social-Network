@@ -59,6 +59,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<PostResponse> findPostByUser(Integer userId) {
+    return postRepository.findPostByUserId(userId).stream().map(postMapper::toPostResponse).toList();
+    }
+
+    @Override
     public List<PostResponse> findPostByUserId(Integer userId) {
 //        List<Post> posts = postRepository.findPostByUserId(userId);
         return postRepository.findPostByUserId(userId).stream().map(postMapper::toPostResponse).toList();

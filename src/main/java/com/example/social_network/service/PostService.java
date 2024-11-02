@@ -10,6 +10,8 @@ public interface PostService {
 
     public void delete (Integer postId, Integer userId);
 
+    public List<PostResponse> findPostByUser(Integer userId);
+
     public List<PostResponse> findPostByUserId(Integer userId);
 
     public PostResponse findPostById(Integer id);

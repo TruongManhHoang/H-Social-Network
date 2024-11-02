@@ -36,10 +36,10 @@ public class PostController {
         postService.delete(postId, user.getId());
         return ApiResponse.<String>builder().result("Post has been deleted").build();
     }
-    @GetMapping("/{postId}")
-    public ApiResponse<PostResponse> findPostById(@PathVariable Integer postId){
-        return ApiResponse.<PostResponse>builder()
-                .result(postService.findPostById(postId))
+    @GetMapping("/user/{userId}")
+    public ApiResponse<List<PostResponse>> findUserPostId(@PathVariable Integer userId){
+        return ApiResponse.<List<PostResponse>>builder()
+                .result(postService.findPostByUserId(userId))
                 .build();
     }
 
@@ -47,7 +47,7 @@ public class PostController {
     public ApiResponse<List<PostResponse>> findUserPostId(@RequestHeader("Authorization") String jwt){
         User user = userService.findUserByJwt(jwt);
         return ApiResponse.<List<PostResponse>>builder()
-                .result(postService.findPostByUserId(user.getId()))
+                .result(postService.findPostByUser(user.getId()))
                 .build();
     }
     @PutMapping("/update/user/{postId}")

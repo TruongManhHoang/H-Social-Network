@@ -71,10 +71,10 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public User getUserFromToken(@RequestHeader("Authorization") String jwt){
+    public UserResponse getUserFromToken(@RequestHeader("Authorization") String jwt){
         User user = userService.findUserByJwt(jwt);
-        user.setPassword(null);
-        return user;
+        UserResponse userResponse = new UserResponse(user);
+        return userResponse;
     }
 
 }
