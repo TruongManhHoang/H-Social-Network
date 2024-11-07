@@ -27,7 +27,7 @@ public class ChatController {
     public ApiResponse<ChatResponse> createChat(@RequestHeader("Authorization") String jwt, @RequestBody CreateChatRequest request) {
         User reqUser = userService.findUserByJwt(jwt);
         User user2 = userService.getUserById(request.getUserId());
-        ChatResponse chatResponse = chatService.createChat(reqUser, user2);
+        ChatResponse chatResponse = chatService.createChat(reqUser, user2, request);
 
         return ApiResponse.<ChatResponse>builder()
                 .result(chatResponse)

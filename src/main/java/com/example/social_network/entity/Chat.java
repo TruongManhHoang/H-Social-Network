@@ -26,7 +26,6 @@ public class Chat {
 
     String chatImage;
     @ManyToMany
-    @JsonIgnore
     @JoinTable(
             name = "chat_users",
             joinColumns = @JoinColumn(name = "chat_id"),

@@ -27,17 +27,14 @@ public class Reels {
     String video;
 
     @ManyToOne
-    @JsonIgnore
     User user;
 
     @ManyToMany
-    @JsonIgnore
     List<User> liked = new ArrayList<>();
 
     LocalDateTime createdAt;
 
     @OneToMany
-    @JsonIgnore
     List<Comment> comments = new ArrayList<>();
 
 }

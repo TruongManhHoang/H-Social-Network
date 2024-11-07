@@ -1,5 +1,6 @@
 package com.example.social_network.service.Impl;
 
+import com.example.social_network.dto.request.CreateChatRequest;
 import com.example.social_network.dto.response.ChatResponse;
 import com.example.social_network.entity.Chat;
 import com.example.social_network.entity.User;
@@ -29,13 +30,14 @@ public class ChatServiceImpl implements ChatService {
     UserRepository userRepository;
 
     @Override
-    public ChatResponse createChat(User reqUser, User user2) {
+    public ChatResponse createChat(User reqUser, User user2, CreateChatRequest request) {
         Chat isExist = chatRepository.findChatByUsers(user2, reqUser);
         if (isExist != null) {
             return chatMapper.toChatResponse(isExist);
         }
 
         Chat chat = new Chat();
+        chat.setChatName(request.getChatName());
         chat.getUsers().add(user2);
         chat.getUsers().add(reqUser);
         chat.setTimestamp(LocalDateTime.now());

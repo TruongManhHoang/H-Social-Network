@@ -1,6 +1,7 @@
 package com.example.social_network.mapper;
 
 import com.example.social_network.dto.request.ChatRequest;
+import com.example.social_network.dto.request.CreateChatRequest;
 import com.example.social_network.dto.request.StoryRequest;
 import com.example.social_network.dto.response.ChatResponse;
 import com.example.social_network.dto.response.StoryResponse;
@@ -13,7 +14,7 @@ import org.mapstruct.Mapping;
 public interface ChatMapper {
     @Mapping(target = "users", ignore = true)
     @Mapping(target = "timestamp", ignore = true)
-    Chat toChat(ChatRequest request);
+    Chat toChat(CreateChatRequest request);
 
     ChatResponse toChatResponse(Chat chat);
 }
